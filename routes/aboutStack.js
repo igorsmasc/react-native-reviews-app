@@ -1,27 +1,29 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import About from "../screens/about";
+import Header from '../shared/header';
 
 const Stack = createStackNavigator()
 
-export default function aboutNavigator() {
+export default function aboutNavigator({ navigation }) {
   return (
     <Stack.Navigator initialRouteName='About'
     screenOptions={{
       headerStyle: {
-        backgroundColor: '#999',
+        backgroundColor: '#eee',
       },
-      headerTintColor: '#fff',
+      headerTintColor: '#444',
       headerTitleStyle: {
         fontWeight: 'bold',
       },
+      headerTitleAlign: 'center'
     }}
     >
       <Stack.Screen 
           name='About' 
           component={About} 
-          options={{ 
-            title: 'About',
+          options={{
+            headerTitle: () => <Header navigation={navigation} title="About GZ" />,
           }}
       />
     </Stack.Navigator>
