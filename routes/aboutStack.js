@@ -16,14 +16,13 @@ export default function aboutNavigator({ navigation }) {
       headerTitleStyle: {
         fontWeight: 'bold',
       },
-      headerTitleAlign: 'center'
     }}
     >
       <Stack.Screen 
           name='About' 
           component={About} 
           options={{
-            headerTitle: () => <Header navigation={navigation} title="About GZ" />,
+            headerTitle: () => <Header navigation={navigation} title="About GameZone" />,
           }}
       />
     </Stack.Navigator>

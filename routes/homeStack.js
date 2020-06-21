@@ -17,7 +17,6 @@ export default function homeNavigator({ navigation }) {
         headerTitleStyle: {
           fontWeight: 'bold',
         },
-        headerTitleAlign: 'center',
       }}
       >
         <Stack.Screen 
