@@ -1,32 +1,40 @@
 import React from 'react'
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import Home from '../screens/home';
-import ReviewDetails from '../screens/reviewDetails';
+import { createStackNavigator, HeaderTitle } from '@react-navigation/stack'
+import Home from "../screens/home";
+import ReviewDetails from "../screens/reviewDetails";
+import Header from '../shared/header';
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator()
 
-export default function Navigator() {
-
-    return(
-        <NavigationContainer initialRouteName="Home">
-            <Stack.Navigator  screenOptions={{
-                    headerStyle: {
-                      backgroundColor: "#eee",
-                      height: 60,
-                    },
-                    headerTintColor: "#444",
-                 }}>
-                <Stack.Screen name="Home" component={Home} 
-                    options={{
-                        title:"GameZone",
-                        }} />
-                <Stack.Screen name="ReviewDetails" component={ReviewDetails} 
-                    options={{
-                        title:"Review Details",
-                        }} />
-            </Stack.Navigator>
-        </NavigationContainer>
-    )
-};
-
+export default function homeNavigator({ navigation }) {
+  return (
+    <Stack.Navigator initialRouteName='Home'
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#eee',
+        },
+        headerTintColor: '#444',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+        headerTitleAlign: 'center',
+      }}
+      >
+        <Stack.Screen 
+            name='Home' 
+            component={Home} 
+            options={{
+              headerTitle: () => <Header navigation={navigation} title="GameZone"/>,
+            }}
+            
+        />
+        <Stack.Screen 
+            name='ReviewDetails' 
+            component={ReviewDetails} 
+            options={{ 
+              title: 'Review Details'
+            }}
+        />
+      </Stack.Navigator>
+  );
+}
