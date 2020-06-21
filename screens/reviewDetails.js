@@ -12,7 +12,7 @@ export default function ReviewDetails({ route }) {
                 <Text>{ title }</Text>
                 <Text>{ body }</Text>
                 <View style={styles.rating}>
-                    <Text>GameZone rating:</Text>
+                    <Text>GameZone rating: </Text>
                     <Image source={images.ratings[rating]} />
                 </View>
             </Card>
@@ -21,5 +21,12 @@ export default function ReviewDetails({ route }) {
 }
 
 const styles = StyleSheet.create({
-
+    rating: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        paddingTop: 16,
+        marginTop: 16,
+        borderTopWidth: 1,
+        borderTopColor: '#eee'
+    }
 });
