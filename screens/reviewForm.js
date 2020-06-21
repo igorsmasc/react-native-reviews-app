@@ -6,13 +6,13 @@ import * as yup from 'yup';
 
 const ReviewSchema = yup.object({
     title: yup.string()
-        .required()
-        .min(3),
+        .required('Title is a required field')
+        .min(3, 'Title must be at least 3 characters'),
     body: yup.string()
-        .required()
-        .min(8),
+        .required('Body is a required field')
+        .min(8, 'Body must be at least 3 characters'),
     rating: yup.string()
-        .required()
+        .required('Rating is a required field')
         .test('is-num-1-5', 'Rating must be a number 1 - 5', (val) => {
             return parseInt(val) < 6 && parseInt(val) > 0;
         })
@@ -31,7 +31,14 @@ export default function ReviewForm({ addReview }) {
                 }}
                 >
                 
-                {({handleChange, values, handleSubmit}) => (
+                {({
+                    handleChange, 
+                    values, 
+                    handleSubmit, 
+                    errors,
+                    touched,
+                    handleBlur
+                }) => (
                     <View>
                         <TextInput 
                             style={globalStyles.input}
@@ -39,7 +46,9 @@ export default function ReviewForm({ addReview }) {
                             name='title'
                             onChangeText={handleChange('title')} 
                             value={values.title}
+                            onBlur={handleBlur('title')}
                         />
+                        <Text style={globalStyles.errorText}>{ touched.title && errors.title }</Text>
 
                         <TextInput 
                             multiline
@@ -47,7 +56,9 @@ export default function ReviewForm({ addReview }) {
                             placeholder='Review Body'
                             onChangeText={handleChange('body')} 
                             value={values.body}
+                            onBlur={handleBlur('body')}
                         />
+                        <Text style={globalStyles.errorText}>{  touched.body && errors.body }</Text>
 
                         <TextInput 
                             style={globalStyles.input}
@@ -55,7 +66,10 @@ export default function ReviewForm({ addReview }) {
                             onChangeText={handleChange('rating')} 
                             keyboardType='numeric'
                             value={values.rating}
+                            onBlur={handleBlur('rating')}
                         />
+                        <Text style={globalStyles.errorText}>{  touched.rating && errors.rating }</Text>
+
                         <Button title="Submit" color='maroon' onPress={handleSubmit} />
                     </View>
                 )}
